@@ -1,16 +1,12 @@
+import * as repo from "../repositories/post.repository.js";
+
 class PostService {
     async createPost(author, data) {
-        //TODO add post. data example : {
-        // 	"title": "JavaEE",
-        // 	"content": "Java is the best for backend",
-        // 	"tags":["Java", "Spring", "backend", "JEE"]
-        // }
-        throw new Error('Not implemented');
+        return await repo.createPost({author, ...data});
     }
 
     async getPostById(id) {
-        //TODO get post by id
-        throw new Error('Not implemented');
+        return await repo.getPostById(id);
     }
 }
 export default new PostService();

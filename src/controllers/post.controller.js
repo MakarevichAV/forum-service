@@ -13,6 +13,9 @@ class PostController {
     async getPostById(req, res, next) {
         try {
             const post = await postService.getPostById(req.params.id);
+            if (!post) {
+                return res.status(404).send();
+            }
             return res.status(200).json(post);
         } catch (e) {
             next(e);
