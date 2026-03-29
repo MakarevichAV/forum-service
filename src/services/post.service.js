@@ -1,7 +1,8 @@
 import postRepo from "../repositories/post.repository.js";
 class PostService {
     async createPost(author, data) {
-        return await postRepo.createPost({author, ...data});
+        const tags = [...new Set(data.tags)];
+        return await postRepo.createPost({...data, tags, author});
     }
 
     async getPostById(id) {
@@ -13,8 +14,11 @@ class PostService {
     }
 
     async deletePost(id) {
-        //TODO delete post by id
-        throw new Error('Not implemented');
+        const post = await postRepo.deletePost(id);
+        if (!post) {
+            throw new Error(`Post with id = ${id} not found`);
+        }
+        return post;
     }
 
     async addLike(id) {

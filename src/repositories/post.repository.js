@@ -7,6 +7,9 @@ class PostRepository {
     async findPostById(id) {
         return Post.findById(id)
     }
+    async deletePost(id) {
+        return Post.findByIdAndDelete(id)
+    }
 }
 
 export default new PostRepository();

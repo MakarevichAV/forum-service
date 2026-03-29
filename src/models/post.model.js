@@ -23,7 +23,7 @@ const PostSchema = new Schema({
         default: Date.now
     },
     tags: {
-        type: [{type: String,  unique: true}],
+        type: [String],
         default: []
     },
     likes: {
