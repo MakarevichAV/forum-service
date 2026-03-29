@@ -1,17 +1,26 @@
 {
   "name": "forum-service",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Forum web service",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cross-env PORT=8000 node_modules src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/MakarevichAV/forum-service.git"
-  },
-  "private": true,
+  "keywords": [],
+  "author": "Makar",
+  "license": "ISC",
+  "type": "module",
   "dependencies": {
-    "mongoose": "^9.3.3"
+    "cross-env": "^10.1.0",
+    "express": "^5.2.1",
+    "joi": "^18.0.2",
+    "mongoose": "^9.3.1"
+  },
+  "devDependencies": {
+    "dotenv": "^17.3.1",
+    "jest": "^30.3.0",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
   }
 }
