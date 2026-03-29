@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import CommentSchema from "./comment.model";
+import commentSchema from "./comment.model.js";
 
 const PostSchema = new mongoose.Schema({
     title: {
@@ -27,7 +27,7 @@ const PostSchema = new mongoose.Schema({
         default: 0
     },
     comments: {
-        type: [CommentSchema],
+        type: [commentSchema],
         default: []
     }
 },
@@ -37,6 +37,7 @@ const PostSchema = new mongoose.Schema({
             transform: (doc, ret) => {
                 ret.id = doc._id;
                 delete ret._id;
+                ret.dateCreated = doc.dateCreated.toISOString().slice(0, 19);
             }
         }
     })

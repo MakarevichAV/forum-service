@@ -5,7 +5,9 @@ class PostService {
     }
 
     async getPostById(id) {
-        return await postRepo.findPostById(id);
+        const post = await postRepo.findPostById(id);
+        if (!post) throw new Error(`Post with id = ${id} not found`);
+        return post;
     }
 
     async deletePost(id) {

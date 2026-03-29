@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const CommentSchema = new mongoose.Schema({
+const commentSchema = new mongoose.Schema({
     user: {
         type: String,
         required: true
@@ -21,4 +21,4 @@ const CommentSchema = new mongoose.Schema({
     _id: false,
 })
 
-export default CommentSchema;
+export default commentSchema;
