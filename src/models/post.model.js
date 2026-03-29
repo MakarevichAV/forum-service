@@ -1,7 +1,11 @@
-import mongoose from "mongoose"
+import {Schema, model, Types} from "mongoose"
 import commentSchema from "./comment.model.js";
 
-const PostSchema = new mongoose.Schema({
+const PostSchema = new Schema({
+    _id: {
+        type: String,
+        default: () => new Types.ObjectId().toHexString(),
+    },
     title: {
         type: String,
         required: true
@@ -42,4 +46,4 @@ const PostSchema = new mongoose.Schema({
         }
     })
 
-export default mongoose.model('Post', PostSchema, 'posts');
+export default model('Post', PostSchema, 'posts');
