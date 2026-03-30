@@ -49,7 +49,7 @@ class PostController {
     async addComment(req, res, next) {
         try {
             const {id, commenter} = req.params;
-            const post = await postService.addComment(id, commenter, req.body);
+            const post = await postService.addComment(id, commenter, req.body.message);
             return res.json(post);
         } catch (e) {
             next(e);
