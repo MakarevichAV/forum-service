@@ -22,8 +22,11 @@ class PostService {
     }
 
     async addLike(id) {
-        //TODO add like by id
-        throw new Error('Not implemented');
+        const post = await postRepo.addLike(id);
+        if (!post) {
+            throw new Error(`Post with id = ${id} not found`);
+        }
+        return true;
     }
 
     async getPostsByAuthor(author) {

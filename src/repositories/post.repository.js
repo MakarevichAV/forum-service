@@ -10,6 +10,9 @@ class PostRepository {
     async deletePost(id) {
         return Post.findByIdAndDelete(id)
     }
+    async addLike(id) {
+        return Post.findByIdAndUpdate(id, {$inc: {likes: 1}})
+    }
 }
 
 export default new PostRepository();
