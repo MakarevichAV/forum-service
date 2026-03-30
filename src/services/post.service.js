@@ -1,4 +1,5 @@
 import postRepo from "../repositories/post.repository.js";
+
 class PostService {
     async createPost(author, data) {
         const tags = [...new Set(data.tags)];
@@ -30,28 +31,32 @@ class PostService {
     }
 
     async getPostsByAuthor(author) {
-        //TODO get posts by author
-        throw new Error('Not implemented');
+        return await postRepo.getPostsByAuthor(author);
     }
 
     async addComment(id, commenter, content) {
-        //TODO add comment
-        throw new Error('Not implemented');
+        const post = await postRepo.addComment(id, {user: commenter, message: content})
+        if (!post) {
+            throw new Error(`Post with id = ${id} not found`);
+        }
+        return post;
     }
 
     async getPostsByTags(tagsString) {
-        //TODO get posts by tags
-        throw new Error('Not implemented');
+        const tags = tagsString.split(',');
+        return await postRepo.getPostsByTags(tags);
     }
 
     async getPostsByPeriod(dateFrom, dateTo) {
-        //TODO get posts by period
-        throw new Error('Not implemented');
+        return await postRepo.getPostsByPeriod(dateFrom, dateTo);
     }
 
     async updatePost(id, data) {
-        //TODO update post
-        throw new Error('Not implemented');
+        const post = await postRepo.updatePost(id, data);
+        if (!post) {
+            throw new Error(`Post with id = ${id} not found`);
+        }
+        return post;
     }
 
 }

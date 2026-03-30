@@ -6,9 +6,14 @@ const schemas = {
         content: Joi.string().required(),
         tags: Joi.array().items(Joi.string()),
     }),
-    // addLike: Joi.object({
-    //     id: Joi.string().hex().length(24).required()
-    // })
+    updatePost: Joi.object({
+        title: Joi.string().required(),
+        content: Joi.string().required(),
+        tags: Joi.array().items(Joi.string()),
+    }),
+    addComment: Joi.object({
+        message: Joi.string().min(1).max(500).required(),
+    })
 }
 
 const validate = schemaName => (req, res, next) => {

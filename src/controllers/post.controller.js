@@ -49,7 +49,7 @@ class PostController {
     async addComment(req, res, next) {
         try {
             const {id, commenter} = req.params;
-            const post = await postService.addComment(id, commenter);
+            const post = await postService.addComment(id, commenter, req.body);
             return res.json(post);
         } catch (e) {
             next(e);
@@ -77,7 +77,7 @@ class PostController {
 
     async updatePost(req, res) {
         try {
-            const post = await postService.createPost(req.params.id, req.body);
+            const post = await postService.updatePost(req.params.id, req.body);
             return res.status(200).json(post);
         } catch (e) {
             next(e);
