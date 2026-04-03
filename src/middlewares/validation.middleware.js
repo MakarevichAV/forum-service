@@ -13,15 +13,20 @@ const schemas = {
     }),
     addComment: Joi.object({
         message: Joi.string().min(1).max(500).required(),
+    }),
+
+    dateFormat: Joi.object({
+        dateFrom: Joi.date().iso().required(),
+        dateTo: Joi.date().iso().required().greater(Joi.ref('dateFrom')),
     })
 }
 
-const validate = schemaName => (req, res, next) => {
+const validate = (schemaName, target = "body") => (req, res, next) => {
     const schema = schemas[schemaName];
     if (!schema) {
         return next(new Error('Invalid schema name'));
     }
-    const { error } = schema.validate(req.body);
+    const { error } = schema.validate(req[target]);
     if (error) {
         return res.status(400).send({
             message: error.details[0].message,

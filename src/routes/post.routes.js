@@ -10,7 +10,7 @@ router.patch('/post/:id/like', postController.addLike)
 router.get('/posts/author/:author', postController.getPostByAuthor)
 router.patch('/post/:id/comment/:commenter', validate('addComment'), postController.addComment)
 router.get('/posts/tags', postController.getPostsByTags)
-router.get('/posts/period', postController.getPostsByPeriod)
+router.get('/posts/period', validate('dateFormat', 'query'), postController.getPostsByPeriod)
 router.patch('/post/:id', validate('updatePost'), postController.updatePost)
 
 export default router;

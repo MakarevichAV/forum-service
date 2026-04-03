@@ -43,7 +43,7 @@ class PostService {
     }
 
     async getPostsByTags(tagsString) {
-        const tags = tagsString.split(',');
+        const tags = tagsString.split(',').map(tag => tag.trim());
         return await postRepo.getPostsByTags(tags);
     }
 

@@ -58,7 +58,13 @@ class PostController {
 
     async getPostsByTags(req, res, next) {
         try {
-            const posts = await postService.getPostsByTags(req.query.values);
+            let values;
+            if (Array.isArray(req.query.values)) {
+                values = req.query.values.join(',');
+            } else {
+                values = req.query.values;
+            }
+            const posts = await postService.getPostsByTags(values);
             return res.json(posts);
         } catch(e) {
             next(e);
@@ -75,7 +81,7 @@ class PostController {
         }
     }
 
-    async updatePost(req, res) {
+    async updatePost(req, res, next) {
         try {
             const post = await postService.updatePost(req.params.id, req.body);
             return res.json(post);
