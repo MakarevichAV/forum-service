@@ -1,0 +1,38 @@
+import {Schema} from "mongoose";
+
+const AccountSchema = new Schema({
+    _id: {
+        type: String,
+        default: () => new Types.ObjectId().toHexString(),
+    },
+    login: {
+        type: String,
+        required: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    firstName: {
+        type: String,
+        default: ''
+    },
+    lastName: {
+        type: String,
+        default: ''
+    },
+    roles: {
+        type: [String],
+        default: []
+    }
+},
+    {
+        versionKey: false,
+        toJSON: {
+            transform(doc, ret) {
+                delete ret._id;
+                delete ret.password;
+            }
+        }
+    }
+    )
