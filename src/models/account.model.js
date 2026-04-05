@@ -1,31 +1,32 @@
-import {Schema} from "mongoose";
+import mongoose, {Schema, Types, model} from "mongoose";
 
 const AccountSchema = new Schema({
-    _id: {
-        type: String,
-        default: () => new Types.ObjectId().toHexString(),
+        _id: {
+            type: String,
+            default: () => new Types.ObjectId().toHexString(),
+        },
+        login: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        firstName: {
+            type: String,
+            default: ''
+        },
+        lastName: {
+            type: String,
+            default: ''
+        },
+        roles: {
+            type: [String],
+            default: []
+        }
     },
-    login: {
-        type: String,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    firstName: {
-        type: String,
-        default: ''
-    },
-    lastName: {
-        type: String,
-        default: ''
-    },
-    roles: {
-        type: [String],
-        default: []
-    }
-},
     {
         versionKey: false,
         toJSON: {
@@ -35,4 +36,6 @@ const AccountSchema = new Schema({
             }
         }
     }
-    )
+)
+
+export default model('Account', AccountSchema, 'Users')

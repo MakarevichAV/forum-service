@@ -1,7 +1,12 @@
+import accountRepo from "../repositories/account.repository.js";
 
 class AccountService {
     async register(user) {
-        //TODO
+        const account = await accountRepo.register(user);
+        if (!account) {
+            throw new Error(`Conflict: Account with login ${user.login} already registered`);
+        }
+        return account;
     }
     async login(login, password) {
         //TODO

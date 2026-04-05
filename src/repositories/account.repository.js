@@ -1,7 +1,8 @@
+import User from '../models/account.model.js';
 
 class AccountRepository {
     async register(user) {
-        //TODO
+        return User.create(user)
     }
     async login(login, password) {
         //TODO
@@ -25,3 +26,5 @@ class AccountRepository {
         //TODO
     }
 }
+
+export default new AccountRepository();
