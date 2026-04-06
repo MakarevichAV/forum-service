@@ -24,7 +24,7 @@ const AccountSchema = new Schema({
         },
         roles: {
             type: [String],
-            default: []
+            default: ['USER']
         }
     },
     {
@@ -38,4 +38,4 @@ const AccountSchema = new Schema({
     }
 )
 
-export default model('Account', AccountSchema, 'Users')
+export default model('Account', AccountSchema, 'users')

@@ -1,33 +1,53 @@
 import accountRepo from "../repositories/account.repository.js";
 
 class AccountService {
-    async register(user) {
-        const account = await accountRepo.register(user);
-        if (!account) {
-            throw new Error(`Conflict: Account with login ${user.login} already registered`);
+    async register(data) {
+        const user = await accountRepo.register(data);
+        if (!user) {
+            throw new Error(`Account with login ${data.login} already registered`);
         }
-        return account;
+        return user;
     }
     async login(login, password) {
         //TODO
     }
     async deleteUser(login) {
-        //TODO
+        const user = await accountRepo.deleteUser(login);
+        if (!user) {
+            throw new Error(`Account with login ${login} does not exist`);
+        }
+        return user;
     }
     async updateUser(login, data) {
-        //TODO
+        const user = await accountRepo.updateUser(login, data);
+        if (!user) {
+            throw new Error(`Account with login ${login} does not exist`);
+        }
+        return user;
     }
     async addRole(login, role) {
-        //TODO
+        const user = await accountRepo.addRole(login, role);
+        if (!user) {
+            throw new Error(`Account with login ${login} does not exist`);
+        }
+        return {login: user.login, roles: user.roles};
     }
     async deleteRole(login, role) {
-        //TODO
+        const user = await accountRepo.deleteRole(login, role);
+        if (!user) {
+            throw new Error(`Account with login ${login} does not exist`);
+        }
+        return {login: user.login, roles: user.roles};
     }
     async changePassword(newPassword) {
         //TODO
     }
     async getUser(login) {
-        //TODO
+        const user = await accountRepo.getUser(login);
+        if (!user) {
+            throw new Error(`Account with login ${login} does not exist`);
+        }
+        return user;
     }
 }
 

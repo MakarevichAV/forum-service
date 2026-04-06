@@ -8,22 +8,22 @@ class AccountRepository {
         //TODO
     }
     async deleteUser(login) {
-        //TODO
+        return User.findOneAndDelete({login: login}).exec()
     }
     async updateUser(login, data) {
-        //TODO
+        return User.findOneAndUpdate({login: login}, {$set: data}, {new: true}).exec()
     }
     async addRole(login, role) {
-        //TODO
+        return User.findOneAndUpdate({login: login}, {$push: {roles: role}}, {new: true}).exec()
     }
     async deleteRole(login, role) {
-        //TODO
+        return User.findOneAndUpdate({login: login}, {$pull: {roles: role}}, {new: true}).exec()
     }
     async changePassword(newPassword) {
         //TODO
     }
     async getUser(login) {
-        //TODO
+        return User.findOne({login: login})
     }
 }
 

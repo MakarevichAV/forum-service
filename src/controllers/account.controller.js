@@ -15,27 +15,57 @@ class AccountController {
     }
 
     async deleteUser(req, res, next) {
-        //TODO deleting user
+        try {
+            const user = await accountService.deleteUser(req.params.user);
+            return res.status(200).json(user);
+        } catch(e) {
+            next(e)
+        }
     }
 
     async updateUser(req, res, next) {
-        //TODO updating user
+        try {
+            const user = await accountService.updateUser(req.params.user, req.body);
+            return res.status(200).json(user);
+        } catch(e) {
+            next(e)
+        }
     }
 
     async addRole(req, res, next) {
-        //TODO adding role
+        try {
+            const user = await accountService.addRole(req.params.user, req.params.role);
+            return res.status(200).json(user);
+        } catch(e) {
+            next(e)
+        }
     }
 
     async deleteRole(req, res, next) {
-        //TODO deleting role
+        try {
+            const user = await accountService.deleteRole(req.params.user, req.params.role);
+            return res.status(200).json(user);
+        } catch(e) {
+            next(e)
+        }
     }
 
     async changePassword(req, res, next) {
-        //TODO changing password
+        try {
+            await accountService.changePassword(req.body.password);
+            return res.status(204).send();
+        } catch(e) {
+            next(e)
+        }
     }
 
     async getUser(req, res, next) {
-        //TODO getting user by login
+        try {
+            const user = await accountService.getUser(req.params.user);
+            return res.status(200).json(user);
+        } catch(e) {
+            next(e)
+        }
     }
 }
 

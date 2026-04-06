@@ -1,5 +1,16 @@
 import Joi from 'joi';
 
+const passwordValidator = Joi.string()
+    .min(8)
+    .max(20)
+    .pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/)
+    .message('Password must contain letters and numbers, and be at least 8 characters long')
+    .required();
+
+const nameValidator = Joi.string()
+    .pattern(/^[A-Za-z]+$/)
+    .message('First and last name must contain only letters');
+
 const schemas = {
     createPost: Joi.object({
         title: Joi.string().required(),
@@ -13,6 +24,20 @@ const schemas = {
     }),
     addComment: Joi.object({
         message: Joi.string().min(1).max(500).required(),
+    }),
+
+    register: Joi.object({
+        login: Joi.string().min(1).max(40).required(),
+        password: passwordValidator,
+        firstName: nameValidator,
+        lastName: nameValidator,
+    }),
+    updateUser: Joi.object({
+       firstName: nameValidator,
+       lastName: nameValidator,
+    }),
+    changePassword: Joi.object({
+        password: passwordValidator,
     }),
 
     dateFormat: Joi.object({

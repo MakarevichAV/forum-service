@@ -4,7 +4,7 @@ const errorHandler = (err, req, res, next) => {
     console.log(err.stack)
 
     const containsNotFound = err.message.toLowerCase().includes('not found');
-    const containsConflict = err.message.toLowerCase().includes('duplicate');
+    const containsDuplicate = err.message.toLowerCase().includes('duplicate');
 
     function buildError(stat, err, msg, path) {
         return {
@@ -21,7 +21,7 @@ const errorHandler = (err, req, res, next) => {
             buildError(404, 'Not Found', err.message, req.path)
         );
     }
-    if (err.message && containsConflict) {
+    if (err.message && containsDuplicate) {
         return res.status(409).json(
             buildError(409, 'Conflict', err.message, req.path)
         );
