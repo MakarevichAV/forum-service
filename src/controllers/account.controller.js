@@ -4,7 +4,7 @@ class AccountController {
     async register(req, res, next) {
         try {
             const user = await accountService.register(req.body);
-            return res.status(201).json(user);
+            return res.json(user);
         } catch (e) {
             next(e)
         }
@@ -17,7 +17,7 @@ class AccountController {
     async deleteUser(req, res, next) {
         try {
             const user = await accountService.deleteUser(req.params.user);
-            return res.status(200).json(user);
+            return res.json(user);
         } catch(e) {
             next(e)
         }
@@ -26,7 +26,7 @@ class AccountController {
     async updateUser(req, res, next) {
         try {
             const user = await accountService.updateUser(req.params.user, req.body);
-            return res.status(200).json(user);
+            return res.json(user);
         } catch(e) {
             next(e)
         }
@@ -35,7 +35,7 @@ class AccountController {
     async addRole(req, res, next) {
         try {
             const user = await accountService.addRole(req.params.user, req.params.role);
-            return res.status(200).json(user);
+            return res.json(user);
         } catch(e) {
             next(e)
         }
@@ -44,7 +44,7 @@ class AccountController {
     async deleteRole(req, res, next) {
         try {
             const user = await accountService.deleteRole(req.params.user, req.params.role);
-            return res.status(200).json(user);
+            return res.json(user);
         } catch(e) {
             next(e)
         }
@@ -62,7 +62,7 @@ class AccountController {
     async getUser(req, res, next) {
         try {
             const user = await accountService.getUser(req.params.user);
-            return res.status(200).json(user);
+            return res.json(user);
         } catch(e) {
             next(e)
         }
