@@ -1,12 +1,13 @@
 import {model, Schema} from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const accountSchema = new Schema({
-    _id: {type: String, required: true, alias: 'login'},
-    password: {type: String, required: true},
-    firstName: {type: String, required: true},
-    lastName: {type: String, required: true},
-    roles: {type: [String], default: ['USER']},
-},
+        _id: {type: String, required: true, alias: 'login'},
+        password: {type: String, required: true},
+        firstName: {type: String, required: true},
+        lastName: {type: String, required: true},
+        roles: {type: [String], default: ['USER']},
+    },
     {
         versionKey: false,
         toJSON: {
@@ -18,5 +19,12 @@ const accountSchema = new Schema({
         }
     }
 )
+
+accountSchema.pre('save', async function () {
+    if (this.isModified('password')) {
+        const salt = await bcrypt.genSalt(12)
+        this.password = await bcrypt.hash(this.password, salt)
+    }
+})
 
 export default model("Account", accountSchema, 'users');
