@@ -1,12 +1,13 @@
 import {model, Schema} from 'mongoose';
 import bcrypt from 'bcrypt';
+import {USER} from "../configuration/constants.js";
 
 const accountSchema = new Schema({
         _id: {type: String, required: true, alias: 'login'},
         password: {type: String, required: true},
         firstName: {type: String, required: true},
         lastName: {type: String, required: true},
-        roles: {type: [String], default: ['USER']},
+        roles: {type: [String], default: [USER]},
     },
     {
         versionKey: false,

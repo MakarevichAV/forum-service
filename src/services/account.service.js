@@ -2,12 +2,11 @@ import Repo from "../repositories/account.repository.js"
 
 class AccountService {
     async register(user) {
-        try {
-            return await Repo.addUser(user)
-        } catch (e) {
-            console.log(e)
-            throw new Error('User already exists')
+        const account = await Repo.addUser(user)
+        if (!account) {
+            throw new Error(`User with login ${user.login} already exists`)
         }
+        return account
     }
 
     async removeUser(login) {
@@ -42,8 +41,10 @@ class AccountService {
     }
 
     async changePassword(login, newPassword) {
-        //TODO
-        throw new Error('Not Implemented');
+        const user = await Repo.changePassword(login, newPassword)
+        if (!user) {
+            throw new Error(`User with login ${login} not found`)
+        }
     }
 
     async getUser(login) {

@@ -17,10 +17,14 @@ class AccountRepository {
         return Account.findByIdAndUpdate(login, {$addToSet: {roles: role}}, {new: true}).exec()
     }
     async removeRole(login, role) {
-        return Account.findByIdAndUpdate(login, {$pull: {roles: role}}, {new: true})
+        return Account.findByIdAndUpdate(login, {$pull: {roles: role}}, {new: true}).exec()
     }
     async changePassword(login, newPassword) {
-        return Account.findByIdAndUpdate(login, {password: newPassword})
+        const user = await Account.findById(login)
+        if (user) {
+            user.password = newPassword
+            return user.save()
+        }
     }
 }
 

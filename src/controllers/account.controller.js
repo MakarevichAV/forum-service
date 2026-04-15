@@ -52,8 +52,12 @@ class AccountController {
     }
 
     async changePassword(req, res, next) {
-        //TODO
-        throw new Error('Not implemented');
+        try {
+            await accountService.changePassword(req.params.login, req.body.password);
+            return res.status(204).send()
+        } catch (e) {
+            return next(e);
+        }
     }
 
     async getUsers(req, res, next) {
