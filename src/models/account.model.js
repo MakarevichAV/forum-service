@@ -28,4 +28,8 @@ accountSchema.pre('save', async function () {
     }
 })
 
+accountSchema.methods.comparePassword = async function (password) {
+    return bcrypt.compare(password, this.password);
+}
+
 export default model("Account", accountSchema, 'users');
