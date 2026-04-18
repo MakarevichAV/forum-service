@@ -1,4 +1,4 @@
-import express, {Router} from 'express';
+import express from 'express';
 import mongoose from "mongoose";
 import config from "./configuration/config.js";
 import postRoutes from "./routes/post.routes.js";
